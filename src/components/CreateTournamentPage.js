@@ -12,7 +12,9 @@ function CreateTournamentPage(props) {
   const addTeamHandler = () => {
     setError("");
     let teamCopy = teams.slice();
-    if (teamCopy.includes(newTeam)) {
+    if (newTeam.length < 1) {
+      setError("A team needs a name.");
+    } else if (teamCopy.includes(newTeam)) {
       setError("Two teams cannot have the same name.");
     } else {
       teamCopy.push(newTeam);
@@ -31,6 +33,7 @@ function CreateTournamentPage(props) {
         setTeams(copy);
       }
     });
+    console.log(teams);
   };
 
   const renderTeams = teams => {
@@ -41,7 +44,7 @@ function CreateTournamentPage(props) {
   };
 
   const renderTeam = team => {
-    let name = "button is-info " + team;
+    let name = "button is-dark is-light " + team;
     return (
       <div className="field has-addons" key={team}>
         <div class="control is-expanded">
@@ -49,7 +52,7 @@ function CreateTournamentPage(props) {
         </div>
         <div className="control">
           <button className={name} onClick={removeTeamHandler}>
-            <span className="icon is-small">
+            <span className="icon is-small has-text-white">
               <FontAwesomeIcon icon="minus" />
             </span>
           </button>
@@ -138,7 +141,7 @@ function CreateTournamentPage(props) {
             <div className="field has-addons">
               <div className="control">
                 <button
-                  className="button is-info"
+                  className="button is-primary"
                   onClick={createTournamentHandler}
                 >
                   <span className="icon is-small">
@@ -156,7 +159,7 @@ function CreateTournamentPage(props) {
                 />
               </div>
               <div className="control">
-                <button className="button is-info" onClick={addTeamHandler}>
+                <button className="button is-primary" onClick={addTeamHandler}>
                   <span className="icon is-small">
                     <FontAwesomeIcon icon="plus" />
                   </span>
@@ -172,7 +175,7 @@ function CreateTournamentPage(props) {
 
   let post_query = (
     <div>
-      <section class="hero is-primary">
+      <section class="hero is-light">
         <div class="hero-body">
           <div class="container">
             <h1 class="title">Well done!</h1>
@@ -183,27 +186,21 @@ function CreateTournamentPage(props) {
       <div className="section">
         <div className="columns">
           <div className="column is-one-third is-offset-one-third">
-            <article class="message is-info">
+            <article class="message is-primary">
               <div class="message-body">
-                Your <strong>tournament code</strong> is: <strong> {tournamentCode} </strong> -
-                Use this to login later and assign games.
+                Your <strong>tournament code</strong> is:{" "}
+                <strong> {tournamentCode} </strong> - Use this to login later
+                and assign games. Your teams still need their{" "}
+                <strong>team codes</strong> in order to log in and update their
+                scores. Make sure you login so that you can distribute them!
               </div>
             </article>
             <article class="message is-danger">
               <div class="message-body">
                 <strong>
-                  Do not distribute this to people that you don't want to be
-                  able to make changes to the tournament.
+                  Do not distribute the tournament code to people that you don't
+                  want to be able to make changes to the tournament.
                 </strong>
-              </div>
-            </article>
-            <article class="message is-primary">
-              <div class="message-body">
-                
-                  Your teams still need their <strong>team codes</strong> in order to log in and
-                  update their scores. Make sure you login so that you can
-                  distribute them!
-                
               </div>
             </article>
           </div>

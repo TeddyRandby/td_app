@@ -154,51 +154,68 @@ function LandingPage(props) {
   };
 
   const team = (
-    <div className="section">
-      <div className="columns">
-        <div className="column is-one-third is-offset-one-third">
-          <div className="tabs is-centered is-boxed">
-            <ul>
-              <li className="is-active">
-                <a onClick={setTeamUser}>
-                  <span className="icon is-small">
-                    <FontAwesomeIcon icon="users" />
-                  </span>
-                  <span>Team</span>
-                </a>
-              </li>
-              <li>
-                <a onClick={setTournamentUser}>
-                  <span className="icon is-small">
-                    <FontAwesomeIcon icon="trophy" />
-                  </span>
-                  <span>Tournament</span>
-                </a>
-              </li>
-            </ul>
+    <div>
+      <nav
+        className="navbar has-background-dark"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div className="navbar-brand">
+          <div className="navbar-item">
+          <button className="button is-dark" disabled >
+            <span className="icon is-dark">
+            </span>
+          </button>
           </div>
-          <div className="field is-horizontal">
-            <div className="field-body">
-              <div className="field is-expanded">
-                <div className="field has-addons">
-                  <div className="control is-expanded">
-                    <input
-                      className="input is-primary is-fullwidth"
-                      type="text"
-                      placeholder="Enter your team's code"
-                      onChange={onTeamCodeChange}
-                    />
+          
+        </div>
+      </nav>
+      <div className="section">
+        <div className="columns">
+          <div className="column is-one-third is-offset-one-third">
+            <div className="tabs is-centered is-boxed">
+              <ul>
+                <li className="is-active">
+                  <a onClick={setTeamUser}>
+                    <span className="icon is-small">
+                      <FontAwesomeIcon icon="users" />
+                    </span>
+                    <span>Team</span>
+                  </a>
+                </li>
+                <li>
+                  <a onClick={setTournamentUser}>
+                    <span className="icon is-small">
+                      <FontAwesomeIcon icon="trophy" />
+                    </span>
+                    <span>Tournament</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <div className="control is-expanded">
+                      <input
+                        className="input is-primary"
+                        type="text"
+                        placeholder="Enter your team's code"
+                        onChange={onTeamCodeChange}
+                      />
+                    </div>
+                    <div className="control">
+                      <button
+                        className="button is-primary"
+                        onClick={teamLoginHandler}
+                      >
+                        Join
+                      </button>
+                    </div>
                   </div>
-                  <div className="control">
-                    <button
-                      className="button is-info"
-                      onClick={teamLoginHandler}
-                    >
-                      Join
-                    </button>
-                  </div>
+                  <p class="help is-danger">{error}</p>
                 </div>
-                <p class="help is-danger">{error}</p>
               </div>
             </div>
           </div>
@@ -208,59 +225,76 @@ function LandingPage(props) {
   );
 
   const tournament = (
-    <div className="section">
-      <div className="columns">
-        <div className="column is-one-third is-offset-one-third">
-          <div className="tabs is-centered is-boxed">
-            <ul>
-              <li>
-                <a onClick={setTeamUser}>
-                  <span className="icon is-small">
-                    <FontAwesomeIcon icon="users" />
-                  </span>
-                  <span>Team</span>
-                </a>
-              </li>
-              <li className="is-active">
-                <a onClick={setTournamentUser}>
-                  <span className="icon is-small">
-                    <FontAwesomeIcon icon="trophy" />
-                  </span>
-                  <span>Tournament</span>
-                </a>
-              </li>
-            </ul>
+    <div>
+      <nav
+        className="navbar has-background-dark"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div className="navbar-brand">
+          <div className="navbar-item">
+          <button className="button is-dark" disabled >
+            <span className="icon is-dark">
+            </span>
+          </button>
           </div>
-          <div className="field is-horizontal">
-            <div className="field-body">
-              <div className="field is-expanded">
-                <div className="field has-addons">
-                  <p className="control">
-                    <button
-                      className="button is-info"
-                      onClick={createTournamentHandler}
-                    >
-                      New
-                    </button>
-                  </p>
-                  <p className="control is-expanded">
-                    <input
-                      className="input is-primary"
-                      type="text"
-                      placeholder="Enter a tournament code"
-                      onChange={onTournamentCodeChange}
-                    />
-                  </p>
-                  <p className="control">
-                    <button
-                      className="button is-info"
-                      onClick={tournamentLoginHandler}
-                    >
-                      Join
-                    </button>
-                  </p>
+          
+        </div>
+      </nav>
+      <div className="section">
+        <div className="columns">
+          <div className="column is-one-third is-offset-one-third">
+            <div className="tabs is-centered is-boxed">
+              <ul>
+                <li>
+                  <a onClick={setTeamUser}>
+                    <span className="icon is-small">
+                      <FontAwesomeIcon icon="users" />
+                    </span>
+                    <span>Team</span>
+                  </a>
+                </li>
+                <li className="is-active">
+                  <a onClick={setTournamentUser}>
+                    <span className="icon is-small">
+                      <FontAwesomeIcon icon="trophy" />
+                    </span>
+                    <span>Tournament</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="field is-horizontal">
+              <div className="field-body">
+                <div className="field is-expanded">
+                  <div className="field has-addons">
+                    <p className="control">
+                      <button
+                        className="button is-primary"
+                        onClick={createTournamentHandler}
+                      >
+                        New
+                      </button>
+                    </p>
+                    <p className="control is-expanded">
+                      <input
+                        className="input is-primary"
+                        type="text"
+                        placeholder="Enter a tournament code"
+                        onChange={onTournamentCodeChange}
+                      />
+                    </p>
+                    <p className="control">
+                      <button
+                        className="button is-primary"
+                        onClick={tournamentLoginHandler}
+                      >
+                        Join
+                      </button>
+                    </p>
+                  </div>
+                  <p class="help is-danger">{error}</p>
                 </div>
-                <p class="help is-danger">{error}</p>
               </div>
             </div>
           </div>

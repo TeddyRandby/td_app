@@ -148,7 +148,7 @@ function TDPage(props) {
 
   const renderGame = game => {
     const combinedName = "" + game.home + game.away;
-    let name = "button is-info " + combinedName;
+    let name = "button is-dark is-light " + combinedName;
     return (
       <div className="field has-addons" key={combinedName}>
         <p class="control is-expanded">
@@ -159,7 +159,7 @@ function TDPage(props) {
         </p>
         <div className="control">
           <button className={name} onClick={removeGameHandler}>
-            <span className="icon is-small">
+            <span className="icon is-small has-text-white">
               <FontAwesomeIcon icon="minus" />
             </span>
           </button>
@@ -216,13 +216,6 @@ function TDPage(props) {
 
   let content = (
     <div>
-      <section className="hero is-primary is-bold">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">{props.tournament.name}</h1>
-          </div>
-        </div>
-      </section>
       <div className="section">
         <section className="columns">
           <div className="column is-one-third is-offset-one-third">
@@ -231,7 +224,7 @@ function TDPage(props) {
               <div className="field has-addons">
                 <div className="control">
                   <button
-                    className="button is-info"
+                    className="button is-primary"
                     onClick={resetAllGamesHandler}
                   >
                     <span className="icon is-small">
@@ -254,7 +247,7 @@ function TDPage(props) {
                   </div>
                 </div>
                 <div className="control">
-                  <button className="button is-info" onClick={addGameHandler}>
+                  <button className="button is-primary" onClick={addGameHandler}>
                     <span className="icon is-small">
                       <FontAwesomeIcon icon="plus" />
                     </span>

@@ -7,12 +7,12 @@ function NavBar(props) {
   };
 
   return (
-    <nav className="navbar has-background-link" role="navigation" aria-label="main navigation">
+    <nav className="navbar has-background-dark" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <div className="navbar-item">
-          <button className="button is-primary" onClick={backHandler}>
-            <span className="icon">
-              <FontAwesomeIcon icon="caret-square-left" />
+          <button className="button is-success" onClick={backHandler}>
+            <span className="icon has-text-primary">
+              <FontAwesomeIcon icon="chevron-left" size="1x"/>
             </span>
           </button>
         </div>

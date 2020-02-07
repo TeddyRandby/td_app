@@ -12,7 +12,16 @@ function App() {
   const [game, setGame] = useState({});
 
   const landingPage = (
-    <div className="App">
+    <div
+      className="App has-background-success"
+      style={{
+        height: "100%",
+        position: "absolute",
+        left: "0px",
+        width: "100%",
+        overflow: "hidden"
+      }}
+    >
       <React.Fragment>
         <LandingPage
           setAuthLevel={setAuthLevel}
@@ -24,34 +33,70 @@ function App() {
   );
 
   const tournamentPage = (
-    <div className="App">
+    <div
+      className="App has-background-success"
+      style={{
+        height: "100%",
+        position: "absolute",
+        left: "0px",
+        width: "100%",
+        overflow: "hidden"
+      }}
+    >
       <React.Fragment>
-        <NavBar setAuthLevel={setAuthLevel} name={tournament.name}/>
+        <NavBar setAuthLevel={setAuthLevel} name={tournament.name} />
         <TournamentPage tournament={tournament} />
       </React.Fragment>
     </div>
   );
 
   const createTournamentPage = (
-    <div className="App">
+    <div
+      className="App  has-background-success"
+      style={{
+        height: "100%",
+        position: "absolute",
+        left: "0px",
+        width: "100%",
+        overflow: "hidden"
+      }}
+    >
       <React.Fragment>
-        <NavBar setAuthLevel={setAuthLevel} name={tournament.name} />
+        <NavBar setAuthLevel={setAuthLevel} name="Create a new tournament" />
         <CreateTournamentPage />
       </React.Fragment>
     </div>
   );
 
   const teamPage = (
-    <div className="App">
+    <div
+      className="App has-background-success"
+      style={{
+        height: "100%",
+        position: "absolute",
+        left: "0px",
+        width: "100%",
+        overflow: "hidden"
+      }}
+    >
       <React.Fragment>
-        <NavBar setAuthLevel={setAuthLevel} name={tournament.name}/>
+        <NavBar setAuthLevel={setAuthLevel} name={tournament.name} />
         <TeamPage game={game} />
       </React.Fragment>
     </div>
   );
 
   const tdPage = (
-    <div className="App">
+    <div
+      className="App has-background-success"
+      style={{
+        height: "100%",
+        position: "absolute",
+        left: "0px",
+        width: "100%",
+        overflow: "hidden"
+      }}
+    >
       <React.Fragment>
         <NavBar setAuthLevel={setAuthLevel} name={tournament.name} />
         <TDPage tournament={tournament} />

@@ -4,21 +4,26 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
 // Set your brand colors
-$banner: #313638;
-$home: #335C67 ;
-$away: #335C67;
-$background: #E0DFD5;
-$loading: #EF6461;
+$nav_background: #7487A5;
+$form_things: #8F91A2 ;
+$helper_text: #343F3E;
+$background: #DCEDFF;
+$back_button: #EF6461;
 $highlight: #E4B363;
-
+$light_background: #F7FBFF;
 // Update Bulma's global variables
-$family-sans-serif: "Nunito", sans-serif;
-$dark: $banner;
+// $family-sans-serif: "Nunito", sans-serif;
+$dark: $nav_background;
 $light: $background;
-$primary: $home;
-$info: $away;
-$danger: $loading;
+$primary: $form_things;
+$info: $helper_text;
+$danger: $back_button;
 $link: $highlight;
-
+$success: $light_background;
+$tabs-boxed-link-active-background-color: $light_background;
+$tabs-link-active-color: $helper_text;
+$tabs-boxed-link-active-border-color: $form_things;
+$tabs-border-bottom-color: $form_things;
+$navbar-item-color: $success;
 
 @import "../node_modules/bulma/bulma.sass";

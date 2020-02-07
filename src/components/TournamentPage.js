@@ -13,20 +13,37 @@ function TournamentPage(props) {
         teamsWithGames.push(team);
       }
     });
-    console.log(teamsWithGames);
     fetchGames(teamsWithGames, games => {
       setGames(games);
     });
   }, []);
 
+  const fetchTimer = setInterval(() => {
+    let teamsWithGames = [];
+    props.tournament.teams.forEach(team => {
+      if (team.opponent != "TBD") {
+        teamsWithGames.push(team);
+      }
+    });
+    fetchGames(teamsWithGames, games => {
+      setGames(games);
+    });
+  }, 120000);
+
   const renderGame = game => {
     return (
       <div className="tile is-child box" key={game.home._id}>
-        <div className="has-text-centered">
-          <p class="title is-1">{game.home.name}</p>
-          <p class="subtitle is-1">{game.home.score}</p>
-          <p class="title is-1">{game.away.name}</p>
-          <p class="subtitle is-1">{game.away.score}</p>
+        <div className="columns">
+          <div className="column">
+            <p class="subtitle is-1">
+              {game.home.name}: {game.home.score}
+            </p>
+          </div>
+          <div className="column">
+            <p class="subtitle is-1">
+              {game.away.name}: {game.away.score}
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -102,16 +119,52 @@ function TournamentPage(props) {
     });
   };
 
+  const refreshGamesHandler = () => {
+    let teamsWithGames = [];
+    props.tournament.teams.forEach(team => {
+      if (team.opponent != "TBD") {
+        teamsWithGames.push(team);
+      }
+    });
+    fetchGames(teamsWithGames, games => {
+      setGames(games);
+    });
+  };
+
   let content = (
     <div>
-      
       <div className="section">
         <div className="columns">
           <div className="column is-one-third is-offset-one-third">
-            <div></div>
             <div className="tile is-ancestor">
-              {loadedGames ? renderGames() : <div>No games found</div>}
+              <div className="tile is-parent is-vertical">
+                {loadedGames ? (
+                  renderGames()
+                ) : (
+                  <div className="content has-text-centered">
+                    <p className="title is-4">Loading Games</p>
+                  </div>
+                )}
+              </div>
             </div>
+            {loadedGames ? (
+              <div className="field">
+                <div className="control is-expanded">
+                  <div
+                    className="button has-icons-left is-primary"
+                    onClick={refreshGamesHandler}
+                  >
+                    <span className="icon is-small">
+                      <FontAwesomeIcon icon="redo" />
+                    </span>
+                    <span>Refresh Games</span>
+                    
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </div>
