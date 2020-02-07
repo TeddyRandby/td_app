@@ -30,7 +30,7 @@ function LandingPage(props) {
   };
 
   const teamLoginHandler = () => {
-    let query = `
+    const query = `
     query getGame($team_code: String!) {
       getGame(team_id: $team_code) {
         home{
@@ -77,9 +77,47 @@ function LandingPage(props) {
   };
 
   const tournamentLoginHandler = () => {
-    let query = `
+    const query = `
+    query getTournamentName($tournament_code: String! ) {
+      getTournamentName(name: $tournament_code) {
+        name
+        teams{
+          _id
+          score
+          name
+          opponent
+        }
+      }
+    }`;
+
+    fetch("https://tournament-director-api.herokuapp.com/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        query,
+        variables: { tournament_code }
+      })
+    })
+      .then(r => r.json())
+      .then(response => {
+        try {
+          console.log("data returned:", response.data);
+          props.setTournament(response.data.getTournamentName);
+          props.setAuthLevel(1);
+        } catch (err) {
+          tdLoginHandler();
+        }
+      });
+  };
+
+  const tdLoginHandler = () => {
+    const query = `
   query getTournament($tournament_code: String! ) {
     getTournament(_id: $tournament_code) {
+      _id
       name
       teams{
         _id
@@ -107,7 +145,7 @@ function LandingPage(props) {
         try {
           console.log("data returned:", response.data);
           props.setTournament(response.data.getTournament);
-          props.setAuthLevel(1);
+          props.setAuthLevel(4);
         } catch (err) {
           setError("Invalid Tournament code. Please try again.");
           console.log(err);
@@ -197,6 +235,14 @@ function LandingPage(props) {
             <div className="field-body">
               <div className="field is-expanded">
                 <div className="field has-addons">
+                  <p className="control">
+                    <button
+                      className="button is-info"
+                      onClick={createTournamentHandler}
+                    >
+                      New
+                    </button>
+                  </p>
                   <p className="control is-expanded">
                     <input
                       className="input is-primary"
@@ -218,38 +264,6 @@ function LandingPage(props) {
               </div>
             </div>
           </div>
-          {/* <div className="field">
-            <div className="control">
-              <button
-                className="button is-fullwidth"
-                onClick={createTournamentHandler}
-              >
-                Create a tournament
-              </button>
-            </div>
-          </div> */}
-          {/* {creatingTournament ? (
-            <div>
-              <div className="field is-grouped">
-                <div className="control is-expanded">
-                  <input
-                    className="input is-primary is-fullwidth"
-                    type="text"
-                    placeholder="Enter a team name"
-                  />
-                </div>
-                <div className="control">
-                  <a className="button is-info">
-                  <span className="icon is-small">
-                    <FontAwesomeIcon icon="plus" />
-                  </span>
-                  </a>
-                </div>
-              </div>{" "}
-            </div>
-          ) : (
-            <div></div>
-          )} */}
         </div>
       </div>
     </div>

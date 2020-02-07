@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import LandingPage from "./components/LandingPage";
 import TeamPage from "./components/TeamPage";
 import TournamentPage from "./components/TournamentPage";
-import NewTournamentPage from "./components/NewTournamentPage";
+import CreateTournamentPage from "./components/CreateTournamentPage";
+import TDPage from "./components/TDPage"
 
 function App() {
   const [authLevel, setAuthLevel] = useState(0);
@@ -25,10 +26,10 @@ function App() {
     </div>
   );
 
-  const newTournamentPage = (
+  const createTournamentPage = (
     <div className="App">
       <React.Fragment>
-        <NewTournamentPage />
+        <CreateTournamentPage setAuthLevel={setAuthLevel} />
       </React.Fragment>
     </div>
   );
@@ -36,10 +37,18 @@ function App() {
   const teamPage = (
     <div className="App">
       <React.Fragment>
-        <TeamPage game={game}/>
+        <TeamPage game={game} setAuthLevel={setAuthLevel}/>
       </React.Fragment>
     </div>
   );
+
+  const tdPage = (
+    <div className="App">
+      <React.Fragment>
+        <TDPage tournament={tournament} setAuthLevel={setAuthLevel}/>
+      </React.Fragment>
+    </div>
+  )
 
   switch (authLevel) {
     case 0:
@@ -49,7 +58,9 @@ function App() {
     case 2:
       return teamPage;
     case 3:
-      return newTournamentPage;
+      return createTournamentPage;
+    case 4:
+      return tdPage;
     default:
       return landingPage;
   }
