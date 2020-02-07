@@ -123,9 +123,7 @@ function TDPage(props) {
     }
   };
 
-  const signOutHandler = () => {
-      props.setAuthLevel(0)
-  }
+ 
 
   const removeGameHandler = event => {
     setError("");
@@ -266,11 +264,7 @@ function TDPage(props) {
               <p class="help is-danger">{error}</p>
             </div>
             <div className="content"> {renderTable()}</div>
-            <button className="button is-info" onClick={signOutHandler}>
-                    <span className="icon is-small">
-                      <FontAwesomeIcon icon="sign-out-alt" />
-                    </span>
-                  </button>
+            
           </div>
         </section>
       </div>

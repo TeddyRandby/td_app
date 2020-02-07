@@ -8,12 +8,12 @@ function TournamentPage(props) {
   useEffect(() => {
     // On startup
     let teamsWithGames = [];
-    props.tournament.teams.forEach( team => {
-      if ( team.opponent != "TBD") {
+    props.tournament.teams.forEach(team => {
+      if (team.opponent != "TBD") {
         teamsWithGames.push(team);
       }
-    })
-    console.log(teamsWithGames)
+    });
+    console.log(teamsWithGames);
     fetchGames(teamsWithGames, games => {
       setGames(games);
     });
@@ -71,7 +71,6 @@ function TournamentPage(props) {
         return game.json();
       })
     );
-    console.log(games);
 
     games = games.map(game => {
       if (!game.errors) return game.data.getGame;
@@ -105,15 +104,16 @@ function TournamentPage(props) {
 
   let content = (
     <div>
-      <section className="hero is-primary is-bold">
-        <div className="hero-body">
-          <div className="container">
-            <h1 className="title">{props.tournament.name}</h1>
+      
+      <div className="section">
+        <div className="columns">
+          <div className="column is-one-third is-offset-one-third">
+            <div></div>
+            <div className="tile is-ancestor">
+              {loadedGames ? renderGames() : <div>No games found</div>}
+            </div>
           </div>
         </div>
-      </section>
-      <div className="tile is-ancestor">
-        {loadedGames ? renderGames() : <div></div>}
       </div>
     </div>
   );

@@ -21,9 +21,6 @@ function CreateTournamentPage(props) {
     }
   };
 
-  const signOutHandler = () => {
-    props.setAuthLevel(0);
-  };
   const removeTeamHandler = event => {
     setError("");
     teams.forEach(team => {
@@ -70,45 +67,52 @@ function CreateTournamentPage(props) {
   };
 
   const createTournamentHandler = () => {
-    let query = `
+    setError("");
+    if (name.length < 1) {
+      setError("Please name your tournament.");
+    } else if (teams.length < 1) {
+      setError("Please add teams to your tournament.");
+    } else {
+      let query = `
     mutation createTournament( $tournament:TournamentIn!) {
         createTournament(tournament: $tournament){
           _id
         }
       }`;
 
-    let copy = teams.slice();
-    copy = copy.map(team => {
-      return {
-        score: 0,
-        name: team,
-        opponent: "TBD"
-      };
-    });
-    let tournament = {};
-    tournament["name"] = name;
-    tournament["teams"] = copy;
-
-    fetch("https://tournament-director-api.herokuapp.com/api", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        query,
-        variables: { tournament }
-      })
-    })
-      .then(r => r.json())
-      .then(response => {
-        if (response.errors) {
-          setError(response.errors[0].message);
-        } else {
-          setTournamentCode(response.data.createTournament._id);
-          setQueryStatus(1);
-        }
+      let copy = teams.slice();
+      copy = copy.map(team => {
+        return {
+          score: 0,
+          name: team,
+          opponent: "TBD"
+        };
       });
+      let tournament = {};
+      tournament["name"] = name;
+      tournament["teams"] = copy;
+
+      fetch("https://tournament-director-api.herokuapp.com/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          query,
+          variables: { tournament }
+        })
+      })
+        .then(r => r.json())
+        .then(response => {
+          if (response.errors) {
+            setError(response.errors[0].message);
+          } else {
+            setTournamentCode(response.data.createTournament._id);
+            setQueryStatus(1);
+          }
+        });
+    }
   };
 
   let pre_query = (
@@ -161,11 +165,6 @@ function CreateTournamentPage(props) {
             </div>
             <p class="help is-danger">{error}</p>
           </div>
-          <button className="button is-info" onClick={signOutHandler}>
-            <span className="icon is-small">
-              <FontAwesomeIcon icon="sign-out-alt" />
-            </span>
-          </button>
         </div>
       </div>
     </div>
@@ -186,7 +185,7 @@ function CreateTournamentPage(props) {
           <div className="column is-one-third is-offset-one-third">
             <article class="message is-info">
               <div class="message-body">
-                Your tournament code is: <strong> {tournamentCode} </strong> -
+                Your <strong>tournament code</strong> is: <strong> {tournamentCode} </strong> -
                 Use this to login later and assign games.
               </div>
             </article>
@@ -200,18 +199,13 @@ function CreateTournamentPage(props) {
             </article>
             <article class="message is-primary">
               <div class="message-body">
-                <strong>
-                  Your teams still need their team codes in order to log in and
+                
+                  Your teams still need their <strong>team codes</strong> in order to log in and
                   update their scores. Make sure you login so that you can
                   distribute them!
-                </strong>
+                
               </div>
             </article>
-            <button className="button is-info" onClick={signOutHandler}>
-              <span className="icon is-small">
-                <FontAwesomeIcon icon="sign-out-alt" />
-              </span>
-            </button>
           </div>
         </div>
       </div>
