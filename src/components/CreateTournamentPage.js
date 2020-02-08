@@ -17,7 +17,7 @@ function CreateTournamentPage(props) {
     } else if (teamCopy.includes(newTeam)) {
       setError("Two teams cannot have the same name.");
     } else {
-      let teamToAdd = newTeam.replace(" ","-")
+      let teamToAdd = newTeam.replace(" ","-").toUpperCase();
       teamCopy.push(teamToAdd);
       setNewTeam("");
       setTeams(teamCopy);
@@ -93,9 +93,9 @@ function CreateTournamentPage(props) {
         };
       });
       let tournament = {};
-      tournament["name"] = name;
+      tournament["name"] = name.replace(" ", "-").toUpperCase();
       tournament["teams"] = copy;
-
+      setName(name.replace(" ","-").toUpperCase())
       fetch("https://tournament-director-api.herokuapp.com/api", {
         method: "POST",
         headers: {
@@ -124,6 +124,11 @@ function CreateTournamentPage(props) {
       <div className="columns">
         <div className="column is-one-third is-offset-one-third">
           <div>
+          <article class="message is-info">
+              <div class="message-body">
+                  Make sure you enter all your team's names here. You won't be able to change them, or add more later.
+              </div>
+            </article>
             <div class="field">
               <div class="control">
                 <input
@@ -167,6 +172,9 @@ function CreateTournamentPage(props) {
                 </button>
               </div>
             </div>
+            <p class="help is-info">
+                Once you've added all the teams, click the cloud to create your tournament.
+              </p>
             <p class="help is-danger">{error}</p>
           </div>
         </div>
@@ -189,8 +197,13 @@ function CreateTournamentPage(props) {
           <div className="column is-one-third is-offset-one-third">
             <article class="message is-primary">
               <div class="message-body">
-                Your <strong>tournament code</strong> is:{" "}
-                <strong> {tournamentCode} </strong> - Use this to login later
+                The <strong>tournament code</strong> for your tournament (<strong>{name}</strong>)is:{" "}
+                <strong> {tournamentCode} </strong>
+              </div>
+            </article>
+            <article class="message is-primary">
+              <div class="message-body">
+                Use this to login later
                 and assign games. Your teams still need their{" "}
                 <strong>team codes</strong> in order to log in and update their
                 scores. Make sure you login so that you can distribute them!
