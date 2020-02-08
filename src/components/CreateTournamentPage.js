@@ -197,7 +197,7 @@ function CreateTournamentPage(props) {
           <div className="column is-one-third is-offset-one-third">
             <article class="message is-primary">
               <div class="message-body">
-                The <strong>tournament code</strong> for your tournament (<strong>{name}</strong>)is:{" "}
+                The <strong>tournament code</strong> for your tournament (<strong>{name}</strong>) is:{" "}
                 <strong> {tournamentCode} </strong>
               </div>
             </article>
