@@ -17,7 +17,8 @@ function CreateTournamentPage(props) {
     } else if (teamCopy.includes(newTeam)) {
       setError("Two teams cannot have the same name.");
     } else {
-      teamCopy.push(newTeam);
+      let teamToAdd = newTeam.replace(" ","-")
+      teamCopy.push(teamToAdd);
       setNewTeam("");
       setTeams(teamCopy);
     }

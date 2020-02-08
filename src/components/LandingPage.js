@@ -46,12 +46,7 @@ function LandingPage(props) {
       }
     }
     `;
-    console.log(
-      JSON.stringify({
-        query,
-        variables: { team_code }
-      })
-    );
+
     fetch("https://tournament-director-api.herokuapp.com/api", {
       method: "POST",
       headers: {
@@ -65,13 +60,21 @@ function LandingPage(props) {
     })
       .then(r => r.json())
       .then(response => {
-        try {
-          console.log("data returned:", response.data);
+        console.log(response);
+        if (response.errors) {
+          if (
+            response.errors[0].message ==
+            "Cannot return null for non-nullable field GameOut.away."
+          ) {
+            setError(
+              "Looks like there isn't a game set up for you yet. Try again in a few minutes."
+            );
+          } else {
+            setError("Invalid Team code. Please try again.");
+          }
+        } else {
           props.setGame(response.data.getGame);
           props.setAuthLevel(2);
-        } catch (err) {
-          setError("Invalid Team code. Please try again.");
-          console.log(err);
         }
       });
   };
@@ -162,12 +165,10 @@ function LandingPage(props) {
       >
         <div className="navbar-brand">
           <div className="navbar-item">
-          <button className="button is-dark" disabled >
-            <span className="icon is-dark">
-            </span>
-          </button>
+            <button className="button is-dark" disabled>
+              <span className="icon is-dark"></span>
+            </button>
           </div>
-          
         </div>
       </nav>
       <div className="section">
@@ -233,12 +234,10 @@ function LandingPage(props) {
       >
         <div className="navbar-brand">
           <div className="navbar-item">
-          <button className="button is-dark" disabled >
-            <span className="icon is-dark">
-            </span>
-          </button>
+            <button className="button is-dark" disabled>
+              <span className="icon is-dark"></span>
+            </button>
           </div>
-          
         </div>
       </nav>
       <div className="section">

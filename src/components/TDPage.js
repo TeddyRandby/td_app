@@ -46,6 +46,8 @@ function TDPage(props) {
       let team_id = "";
       let opp_id = "";
 
+     
+
       props.tournament.teams.forEach(team => {
         if (team.name == newGame.home) {
           team_id = team._id;
@@ -122,8 +124,6 @@ function TDPage(props) {
       setGames([]);
     }
   };
-
- 
 
   const removeGameHandler = event => {
     setError("");
@@ -234,14 +234,14 @@ function TDPage(props) {
                 </div>
                 <div class="control is-expanded">
                   <div class="select is-fullwidth is-primary">
-                    <select onChange={onHomeChange}>
+                    <select onChange={onHomeChange} value={home}>
                       {generateOptions(away)}
                     </select>
                   </div>
                 </div>
                 <div class="control is-expanded">
                   <div class="select is-fullwidth is-primary">
-                    <select onChange={onAwayChange}>
+                    <select onChange={onAwayChange} value={away}>
                       {generateOptions(home)}
                     </select>
                   </div>
